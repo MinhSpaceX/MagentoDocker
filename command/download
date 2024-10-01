@@ -3,6 +3,7 @@ command/exec bash -c \
 	composer config -g http-basic.repo.magento.com 28453391a1d620f9db5aded5036a8d8e 438eb5f646bb072a8e2901a8b4d41683 && \
 	composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.7-p2 magento && \
 	cd magento && \
+	chown -R app:app /var/www/html && \
 	find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} + && \
 	find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} + && \
 	chown -R :www-data . && \
