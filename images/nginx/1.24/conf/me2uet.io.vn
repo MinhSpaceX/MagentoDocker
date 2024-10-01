@@ -1,0 +1,12 @@
+upstream fastcgi_backend {
+   server   unix:/sock/docker.sock;
+}
+server {
+   listen 443 ssl;
+   server_name ${SERVER_NAME};
+   ssl_certificate /etc/ssl/certs/me2uet.pem;
+   ssl_certificate_key /etc/ssl/private/privateke_me2uet.key;
+   set $MAGE_ROOT /var/www/html/magento;
+   set $MAGE_DEBUG_SHOW_ARGS 0;
+   include /var/www/html/magento/nginx.conf.sample;
+}

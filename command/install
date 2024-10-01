@@ -1,0 +1,32 @@
+source env/db.env
+
+source env/elasticsearch.env
+
+source env/magento.env
+
+source env/phpfpm.env
+
+source env/nginx.env
+
+command/exec magento/bin/magento setup:install \
+  --db-host="$MYSQL_HOST" \
+  --db-name="$MYSQL_DATABASE" \
+  --db-user="$MYSQL_USER" \
+  --db-password="$MYSQL_PASSWORD" \
+  --base-url=https://"${SERVER_NAME}"/ \
+  --base-url-secure=https://"${SERVER_NAME}"/ \
+  --backend-frontname="$MAGENTO_ADMIN_FRONTNAME" \
+  --admin-firstname="$MAGENTO_ADMIN_FIRST_NAME" \
+  --admin-lastname="$MAGENTO_ADMIN_LAST_NAME" \
+  --admin-email="$MAGENTO_ADMIN_EMAIL" \
+  --admin-user="$MAGENTO_ADMIN_USER" \
+  --admin-password="$MAGENTO_ADMIN_PASSWORD" \
+  --language="$MAGENTO_LOCALE" \
+  --currency="$MAGENTO_CURRENCY" \
+  --timezone="$MAGENTO_TIMEZONE" \
+  --elasticsearch-host="$ES_HOST" \
+  --elasticsearch-port="$ES_PORT" \
+  --search-engine=elasticsearch7 \
+  --use-rewrites=1 \
+  --cleanup-database \
+  --no-interaction
