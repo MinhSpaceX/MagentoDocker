@@ -33,4 +33,4 @@ command/exec magento/bin/magento setup:install \
 
 command/exec magento/bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorAuth
 command/exec magento/bin/magento cache:flush 
-command/exec php bin/magento indexer:reindex
+command/exec php magento/bin/magento indexer:reindex
