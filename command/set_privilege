@@ -1,0 +1,5 @@
+command/exec chown -R app:app /var/www/html
+command/exec find magento/var magento/generated magento/vendor magento/pub/static magento/pub/media magento/app/etc -type f -exec chmod g+w {} +
+command/exec find magento/var magento/generated magento/vendor magento/pub/static magento/pub/media magento/app/etc -type d -exec chmod g+ws {} +
+command/exec chown -R :www-data .
+command/exec chmod u+x magento/bin/magento
