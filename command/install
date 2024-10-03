@@ -30,3 +30,7 @@ command/exec magento/bin/magento setup:install \
   --use-rewrites=1 \
   --cleanup-database \
   --no-interaction
+
+command/exec magento/bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorAuth
+command/exec magento/bin/magento cache:flush 
+command/exec magento/php bin/magento indexer:reindex
