@@ -16,6 +16,7 @@ unzip MagentoDocker.zip -d MagentoDocker
 ## Run these commands to install Magento:
 ```
 cd MagentoDocker
+cd MagentoDocker-main
 chmod -R +x command
 command/start
 command/download
