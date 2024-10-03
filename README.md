@@ -37,8 +37,5 @@ unzip MagentoDocker.zip -d MagentoDocker
 cd MagentoDocker
 cd MagentoDocker-main
 chmod -R +x command
-command/start
-command/download
-command/install
-command/start
+command/all_in_one
 ```
