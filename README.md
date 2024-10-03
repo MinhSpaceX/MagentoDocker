@@ -28,7 +28,7 @@ curl -L -o MagentoDocker.zip https://github.com/MinhSpaceX/MagentoDocker/archive
 
 ## Extract files
 ```
-apt-get update && apt-get install -y unzip          # Uncomment this line if unzip is not present
+apt-get update && apt-get install -y unzip
 unzip MagentoDocker.zip -d MagentoDocker
 ```
 
