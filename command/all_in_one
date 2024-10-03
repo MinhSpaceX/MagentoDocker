@@ -1,0 +1,7 @@
+command/start
+command/download
+command/install
+command/start
+command/disable_2fa
+command/flush_cache
+command/reindex
