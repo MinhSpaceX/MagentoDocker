@@ -39,3 +39,26 @@ cd MagentoDocker-main
 chmod -R +x command
 command/all_in_one
 ```
+### Command list
+```
+# Set up all magento in 1 command
+command/all_in_one
+
+# Build image and Start all containers
+command/start
+
+# Download magento into container (change keys in command/download file)
+command/download
+
+# Install magento (change variables in env/magento file)
+command/install
+
+# Flush cache
+command/flush_cache
+
+# Reindex
+command/reindex
+
+# Disable authentication 2FA
+command/disable_2fa
+```
