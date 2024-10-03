@@ -1,0 +1,1 @@
+command/exec magento/bin/magento cache:flush
