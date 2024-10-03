@@ -1,12 +1,9 @@
-command/exec bash -c \
-	"rm -rf magento && \
-	composer config -g http-basic.repo.magento.com 28453391a1d620f9db5aded5036a8d8e 438eb5f646bb072a8e2901a8b4d41683 && \
-	composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.7-p2 magento && \
-	"
-command/exec bash -c \
-	"chown -R app:app /var/www/html && \
-	cd magento && \
-	find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} + && \
-	find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} + && \
-	chown -R :www-data . && \
-	chmod u+x bin/magento"
+command/exec rm -rf magento
+command/exec composer config -g http-basic.repo.magento.com 28453391a1d620f9db5aded5036a8d8e 438eb5f646bb072a8e2901a8b4d41683
+command/exec composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.7-p2 magento
+command/exec chown -R app:app /var/www/html
+command/exec cd magento
+command/exec find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
+command/exec find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
+command/exec chown -R :www-data .
+command/exec chmod u+x bin/magento
