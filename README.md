@@ -41,6 +41,32 @@ command/all_in_one
 ```
 ### Command list
 ```
+# Import database into container (change sql file name if needed)
+command/mysql_import dump.sql
+```
+```
+# Export database (change sql file name if needed)
+command/mysqldump dump.sql
+```
+```
+# Export database (change sql file name if needed)
+command/mysqldump dump.sql
+```
+```
+# Copy file, folder to container (at /var/www/html/magento)
+command/copy_to_container    # Default arg1 = --all, arg2 = source
+command/copy_to_container --all source   # Same as command 1
+command/copy_to_container folder_or_file_name # A folder or file in source to copy into container
+```
+```
+# Use to load config after copy file
+command/import_config
+```
+```
+# Use to set all permissions and ownerships, automatically used after copy file
+command/set_privilege
+```
+```
 # Set up all magento in 1 command
 command/all_in_one
 ```
