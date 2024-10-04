@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-sudo docker compose -f docker-compose.yaml up -d --remove-orphans 
+command/docker-compose up -d --remove-orphans 
