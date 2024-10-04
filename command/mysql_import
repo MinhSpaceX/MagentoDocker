@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
 source env/db.env
 
-command/docker-compose exec -T db mysqldump -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < "$@"
+file_sql=${1}
+if [ -z "$1" ]; then
+    file_sql="dump.sql"
+fi
+
+if [ -f "$file_sql" ]; then
+    file_sql="$(cd "$(dirname "$file_sql")"; pwd)/$(basename "$file_sql")"
+    echo "Importing file: $file_sql"
+else
+    echo "Error: File not found: $file_sql"
+    exit 1
+fi
+
+command/docker-compose exec -T db mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < "$file_sql"
+echo "Imported file: $file_sql"
