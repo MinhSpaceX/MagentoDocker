@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 f_to_copy=${1}
 
 if [ -z "$1" ]; then
@@ -12,7 +11,7 @@ if [ ! -d "$SRC" ]; then
 fi
 
 if [ "$f_to_copy" == "--all" ]; then
-  docker cp "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/./ "$SRC/"
+  docker cp "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/./ $SRC/
   echo "Completed copying all files from container to host"
 else
   if [ -f "$SRC/$f_to_copy" ]; then
