@@ -1,1 +1,2 @@
+#!/usr/bin/env bash
 command/exec magento/bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorAuth
