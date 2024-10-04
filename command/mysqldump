@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 source env/db.env
 
-command/docker-compose exec -T db sh -c 'mysqldump -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' > "$@"
+command/docker-compose exec -T db sh -c 'mysqldump -u root -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"' > "$@"
