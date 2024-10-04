@@ -1,1 +1,2 @@
+#!/usr/bin/env bash
 command/exec php magento/bin/magento indexer:reindex
