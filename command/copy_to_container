@@ -10,7 +10,7 @@ else
   if [ -f "$SRC/$f_to_copy" ]; then
     docker cp "$SRC/$f_to_copy" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$f_to_copy"
   else
-    docker cp "$REAL_SRC/${f_to_copy}" "$(bin/docker-compose ps -q phpfpm)":/var/www/html/magento/"$(dirname "$f_to_copy")"
+    docker cp "$REAL_SRC/${f_to_copy}" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$(dirname "$f_to_copy")"
   fi
   echo "Completed copying $f_to_copy from host to container"
 fi
