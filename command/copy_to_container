@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 f_to_copy=${1:"--all"}
-SRC=${2:"source"}
+SRC=$(cd -P "source" && pwd)
+if [ ! -d "$SRC" ]; then
+  mkdir -p "$SRC"
+fi
 
 if [ "$1" == "--all" ]; then
   docker cp "$SRC/./" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento
