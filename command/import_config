@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+command/exec magento/bin/magento app:config:import
