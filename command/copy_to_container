@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+f_to_copy=${1:"--all"}
+SRC=${2:"source"}
+
+if [ "$1" == "--all" ]; then
+  docker cp "$SRC/./" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento
+  echo "Completed copying all files from host to container"
+else
+  if [ -f "$SRC/$f_to_copy" ]; then
+    docker cp "$SRC/$f_to_copy" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$f_to_copy"
+  else
+    docker cp "$REAL_SRC/${f_to_copy}" "$(bin/docker-compose ps -q phpfpm)":/var/www/html/magento/"$(dirname "$f_to_copy")"
+  fi
+  echo "Completed copying $f_to_copy from host to container"
+fi
+
+command/set_privilege
+
