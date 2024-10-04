@@ -12,13 +12,13 @@ if [ ! -d "$SRC" ]; then
 fi
 
 if [ "$f_to_copy" == "--all" ]; then
-  sudo docker cp "$SRC/./" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento
+  docker cp "$SRC/./" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento
   echo "Completed copying all files from host to container"
 else
   if [ -f "$SRC/$f_to_copy" ]; then
-    sudo docker cp "$SRC/$f_to_copy" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$f_to_copy"
+    docker cp "$SRC/$f_to_copy" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$f_to_copy"
   else
-    sudo docker cp "$REAL_SRC/${f_to_copy}" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$(dirname "$f_to_copy")"
+    docker cp "$REAL_SRC/${f_to_copy}" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$(dirname "$f_to_copy")"
   fi
   echo "Completed copying $f_to_copy from host to container"
 fi
