@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 source env/db.env
 
 source env/elasticsearch.env
