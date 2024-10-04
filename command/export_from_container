@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-f_to_copy=${1:"--all"}
+f_to_copy=${1}
+
+if [ -z "$1" ]; then
+    f_to_copy="--all"
+fi
+
 SRC=$(cd -P "source" && pwd)
 if [ ! -d "$SRC" ]; then
   mkdir -p "$SRC"
