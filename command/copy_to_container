@@ -11,7 +11,7 @@ if [ ! -d "$SRC" ]; then
   mkdir -p "$SRC"
 fi
 
-if [ "$1" == "--all" ]; then
+if [ "$f_to_copy" == "--all" ]; then
   sudo docker cp "$SRC/./" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento
   echo "Completed copying all files from host to container"
 else
