@@ -23,13 +23,8 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 ```
 mkdir Sites
 cd Sites
-curl -L -o MagentoDocker.zip https://github.com/MinhSpaceX/MagentoDocker/archive/refs/heads/main.zip
-```
-
-## Extract files
-```
-apt-get update && apt-get install -y unzip
-unzip MagentoDocker.zip -d MagentoDocker
+git clone https://github.com/MinhSpaceX/MagentoDocker.git
+cd MagentoDocker
 ```
 
 ## Run these commands to install Magento:
@@ -39,7 +34,8 @@ cd MagentoDocker-main
 chmod -R +x command
 command/all_in_one
 ```
-### Command list
+
+# List of all commands
 ```
 # Import database into container (change sql file name if needed)
 command/mysql_import dump.sql
