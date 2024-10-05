@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+export DOCKER_HOST=tcp://103.216.119.144:2375
