@@ -34,10 +34,7 @@ services:
     build:
       context: ./images/mysql/8.0
       dockerfile: Dockerfile
-    #image: magento/mysql:8.0
     container_name: db
-    ports:
-      - "3306:3306"
     env_file: env/db.env
     volumes:
       - dbdata:/var/lib/mysql
@@ -61,20 +58,12 @@ services:
     #   resources:
     #     limits:
     #       memory: 512M
-    ports:
-      - "9200:9200"
-      - "9300:9300"
     env_file: env/elasticsearch.env
     environment:
       - "discovery.type=single-node"
-      ## Avoid test failures due to small disks
-      ## More info at https://github.com/markshust/docker-magento/issues/488
       - "cluster.routing.allocation.disk.threshold_enabled=false"
       - "index.blocks.read_only_allow_delete"
-      ## Uncomment to set custom heap size to avoid memory errors
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      ## Uncomment to increase the virtual memory map count
-      #- "max_map_count=262144"
     networks:
       - magento
 
