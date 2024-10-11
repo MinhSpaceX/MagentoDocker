@@ -1,10 +1,10 @@
 services:
-  app:
+  nginx:
     build:
       context: ./images/nginx/1.24
       dockerfile: Dockerfile
     #image: magento/magento-nginx-base:1.24
-    container_name: app
+    container_name: nginx
     ports:
       - "443:443"
     volumes: &appvolumes
