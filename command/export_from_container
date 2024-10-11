@@ -15,8 +15,10 @@ if [ "$f_to_copy" == "--all" ]; then
   echo "Completed copying all files from container to host"
 else
   if [ -f "$SRC/$f_to_copy" ]; then
+    echo ""Copying file: $f_to_copy"
     docker cp "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$f_to_copy" "$SRC/$f_to_copy"
   else
+    echo ""Copying folder: $f_to_copy"
     docker cp "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$(dirname "$f_to_copy")" "$REAL_SRC/${f_to_copy}"
   fi
   echo "Completed copying $f_to_copy from container to host"
