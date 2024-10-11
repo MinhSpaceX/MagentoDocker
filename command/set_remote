@@ -1,3 +1,13 @@
 #!/usr/bin/env bash
+
+# Set the Docker host with the TCP address of your server
 export DOCKER_HOST=tcp://ip:port
+
+# Set the path to the CA certificate (this verifies the server)
+export DOCKER_TLS_VERIFY=1
+
+# Set the path to the client certificate (used for authentication)
+export DOCKER_CERT_PATH=/path/to/certs
+
+# Start a new shell
 exec bash
