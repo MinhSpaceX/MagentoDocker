@@ -67,12 +67,11 @@ services:
   #   networks:
   #     - magento
 
-  ## Cloudflare tunnel support, uncomment to enable
-  #tunnel:
-  #  container_name: cloudflared-tunnel
-  #  image: cloudflare/cloudflared:latest
-  #  command: tunnel run
-  #  env_file: env/cloudflare.env
+  tunnel:
+   container_name: cloudflared-tunnel
+   image: cloudflare/cloudflared:latest
+   command: tunnel run
+   env_file: env/cloudflare.env
 
 volumes:
   appdata:
