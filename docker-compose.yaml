@@ -3,14 +3,12 @@ services:
     build:
       context: ./images/nginx/1.24
       dockerfile: Dockerfile
-    #image: magento/magento-nginx-base:1.24
     container_name: nginx
     ports:
       - "443:443"
     volumes: &appvolumes
       - appdata:/var/www/html
       - sockdata:/sock
-      - ssldata:/etc/nginx/certs
     env_file: env/nginx.env
     networks:
       - magento
@@ -39,8 +37,7 @@ services:
 
   redis:
    image: redis:7.2-alpine
-   # ports:	
-   #   - "6379:6379"
+   container_name: redis
    networks:
       - magento
       
@@ -61,23 +58,14 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     networks:
       - magento
-
-  #rabbitmq:
-  #  image: markoshust/magento-rabbitmq:3.12-0
-  #  ports:
-  #    - "15672:15672"
-  #    - "5672:5672"
-  #  volumes:
-  #    - rabbitmqdata:/var/lib/rabbitmq
-  #  env_file: env/rabbitmq.env
-
-  mailcatcher:
-    image: sj26/mailcatcher
-    container_name: mailcatcher
-    ports:
-      - "1080:1080"
-    networks:
-      - magento
+      
+  # mailcatcher:
+  #   image: sj26/mailcatcher
+  #   container_name: mailcatcher
+  #   ports:
+  #     - "1080:1080"
+  #   networks:
+  #     - magento
 
   ## Cloudflare tunnel support, uncomment to enable
   #tunnel:
@@ -86,26 +74,10 @@ services:
   #  command: tunnel run
   #  env_file: env/cloudflare.env
 
-  ## Blackfire support, uncomment to enable
-  #blackfire:
-  #  image: blackfire/blackfire:2
-  #  ports:
-  #    - "8307"
-  #  env_file: env/blackfire.env
-
-  ## Selenium support, uncomment to enable
-  #selenium:
-  #  image: selenium/standalone-chrome-debug:3.8.1
-  #  ports:
-  #    - "5900:5900"
-  #  extra_hosts: *appextrahosts
-
 volumes:
   appdata:
   dbdata:
-  rabbitmqdata:
   sockdata:
-  ssldata:
 networks:
   magento:
     driver: bridge
