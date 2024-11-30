@@ -7,19 +7,15 @@ CERT_DIR="path_to_cert"
 PORT=port_of_remote
 
 if docker context ls --quiet | grep -q "^$CONTEXT_NAME$"; then
-    # Remove the context if it exists
-    echo "Removing context: $CONTEXT_NAME"
-    docker context rm -f $CONTEXT_NAME
+    echo "Context exists: $CONTEXT_NAME"
+    docker context use $CONTEXT_NAME
 else
-    # If the context doesn't exist, print a message
     echo "Context $CONTEXT_NAME does not exist. Creating new one"
+    docker context create $CONTEXT_NAME \
+  	--docker "host=tcp://$SERVER_IP:$PORT,ca=$CERT_DIR/ca.pem,cert=$CERT_DIR/client-cert.pem,key=$CERT_DIR/client-key.pem" \
+  	--description "Docker context with TLS for remote server"
+
+    docker context use $CONTEXT_NAME
 fi
 
-docker context create $CONTEXT_NAME \
-  --docker "host=tcp://$SERVER_IP:$PORT,ca=$CERT_DIR/ca.pem,cert=$CERT_DIR/client-cert.pem,key=$CERT_DIR/client-key.pem" \
-  --description "Docker context with TLS for remote server"
-
-docker context use $CONTEXT_NAME
-
-# Optionally, start a new shell (this is not necessary for the context to work)
 exec bash
