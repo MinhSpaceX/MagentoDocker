@@ -3,6 +3,7 @@ command/start
 command/copy_to_container
 command/mysql_import dump.sql
 command/set_privilege
+command/import_config
 command/start
 command/flush_cache
 command/reindex
