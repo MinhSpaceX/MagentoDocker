@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+command/docker-compose exec -T phpfpm php magento/bin/magento "$@"
