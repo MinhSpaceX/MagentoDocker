@@ -1,13 +1,25 @@
 #!/usr/bin/env bash
 
-# Set the Docker host with the TCP address of your server
-export DOCKER_HOST=tcp://ip:port
+# Set variables for context name and server information
+CONTEXT_NAME="remote-context"
+SERVER_IP="ip"
+CERT_DIR="path_to_cert"
+PORT=port_of_remote
 
-# Set the path to the CA certificate (this verifies the server)
-export DOCKER_TLS_VERIFY=1
+if docker context ls --quiet | grep -q "^$CONTEXT_NAME$"; then
+    # Remove the context if it exists
+    echo "Removing context: $CONTEXT_NAME"
+    docker context rm -f $CONTEXT_NAME
+else
+    # If the context doesn't exist, print a message
+    echo "Context $CONTEXT_NAME does not exist. Creating new one"
+fi
 
-# Set the path to the client certificate (used for authentication)
-export DOCKER_CERT_PATH=/path/to/certs
+docker context create $CONTEXT_NAME \
+  --docker "host=tcp://$SERVER_IP:$PORT,ca=$CERT_DIR/ca.pem,cert=$CERT_DIR/client-cert.pem,key=$CERT_DIR/client-key.pem" \
+  --description "Docker context with TLS for remote server"
 
-# Start a new shell
+docker context use $CONTEXT_NAME
+
+# Optionally, start a new shell (this is not necessary for the context to work)
 exec bash
