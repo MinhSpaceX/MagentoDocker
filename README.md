@@ -34,7 +34,7 @@ chmod -R +x command
 command/all_in_one
 ```
 
-## Run these commands to copy existing project of Magento:
+## Run this command to copy existing project of Magento:
 ```
 command/build_project
 ```
