@@ -1,13 +1,15 @@
+name: me2uet
 services:
   nginx:
     build:
       context: ./images/nginx/1.24
       dockerfile: Dockerfile
-    container_name: me2uet.io.vn
+    container_name: ${SERVER_NAME}
     volumes: &appvolumes
       - appdata:/var/www/html
       - sockdata:/sock
     env_file: env/nginx.env
+    restart: always
     networks:
       - magento
 
@@ -18,6 +20,7 @@ services:
     container_name: phpfpm
     volumes: *appvolumes
     env_file: env/phpfpm.env
+    restart: always
     networks:
       - magento
 
@@ -29,13 +32,14 @@ services:
     env_file: env/db.env
     volumes:
       - dbdata:/var/lib/mysql
+    restart: always
     networks:
       - magento
-
 
   redis:
    image: redis:7.2-alpine
    container_name: redis
+   restart: always
    networks:
       - magento
       
@@ -44,23 +48,20 @@ services:
       context: ./images/elasticsearch/7.17
       dockerfile: Dockerfile
     container_name: elasticsearch
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 512M
     env_file: env/elasticsearch.env
     environment:
       - "discovery.type=single-node"
       - "cluster.routing.allocation.disk.threshold_enabled=false"
       - "index.blocks.read_only_allow_delete"
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms1G -Xmx1G"
+    restart: always
     networks:
       - magento
-    
-  tunnel:
-   container_name: cloudflared-tunnel
-   image: cloudflare/cloudflared:latest
-   command: tunnel run
-   env_file: env/cloudflare.env
-   networks:
-      - magento
- 
+      
   # mailcatcher:
   #   image: sj26/mailcatcher
   #   container_name: mailcatcher
@@ -68,6 +69,15 @@ services:
   #     - "1080:1080"
   #   networks:
   #     - magento
+
+  tunnel:
+   container_name: cloudflared-tunnel
+   image: cloudflare/cloudflared:latest
+   command: tunnel run
+   env_file: env/cloudflare.env
+   restart: always
+   networks:
+      - magento
 
 volumes:
   appdata:
