@@ -17,12 +17,14 @@ services:
     build:
       context: ./images/phpfpm/8.3
       dockerfile: Dockerfile
-    container_name: phpfpm
+    # container_name: phpfpm
     volumes: *appvolumes
     env_file: env/phpfpm.env
     restart: always
     networks:
       - magento
+    deploy:
+      replicas: 2
 
   db:
     build:
