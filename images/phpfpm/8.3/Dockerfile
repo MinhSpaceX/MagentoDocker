@@ -117,3 +117,4 @@ COPY conf/www.conf /usr/local/etc/php-fpm.d/
 USER app:app
 VOLUME /var/www
 WORKDIR /var/www/html
+EXPOSE 9000
