@@ -12,7 +12,7 @@ fi
 
 if [ "$f_to_copy" == "--all" ]; then
   echo "Copying all file from: $SRC"
-  docker cp "$SRC/./" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento
+  docker cp "$SRC/./" "$(command/docker-compose ps -q phpfpm | head -n 1)":/var/www/html/magento
   echo "Completed copying all files from host to container"
 else
   if [ -e "$SRC/$f_to_copy" ]; then
@@ -24,10 +24,10 @@ else
   
   if [ -f "$SRC/$f_to_copy" ]; then
     echo "Copying file: $f_to_copy"
-    docker cp "$SRC/${f_to_copy}" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$f_to_copy"
+    docker cp "$SRC/${f_to_copy}" "$(command/docker-compose ps -q phpfpm | head -n 1)":/var/www/html/magento/"$f_to_copy"
   else
     echo "Copying folder: $f_to_copy"
-    docker cp "$SRC/${f_to_copy}" "$(command/docker-compose ps -q phpfpm)":/var/www/html/magento/"$(dirname "$f_to_copy")"
+    docker cp "$SRC/${f_to_copy}" "$(command/docker-compose ps -q phpfpm | head -n 1)":/var/www/html/magento/"$(dirname "$f_to_copy")"
   fi
   echo "Completed copying $f_to_copy from host to container"
 fi
